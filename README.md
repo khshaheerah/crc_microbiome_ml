@@ -4,7 +4,7 @@
 [![R Version](https://img.shields.io/badge/R-≥4.0-blue)](https://www.r-project.org/)
 [![GitHub last commit](https://img.shields.io/github/last-commit/khshaheerah/crc_microbiome_ml)](https://github.com/YOUR_USERNAME/crc_microbiome_ml)
 
-## 📋 Overview
+## Overview
 
 This project investigates the relationship between the gut microbiome and colorectal cancer (CRC) using public metagenomic sequencing data. We analyze microbial community differences between CRC patients and healthy controls, build a machine learning classifier to predict disease status from stool samples, and validate our findings on an independent cohort. The entire workflow runs on a standard Mac without requiring high-performance computing.
 
@@ -16,7 +16,7 @@ This project investigates the relationship between the gut microbiome and colore
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 crc_microbiome_ml/
 ├── scripts/ # All R scripts (run in order)
@@ -31,7 +31,7 @@ crc_microbiome_ml/
 
 ---
 
-## 📊 Datasets
+## Datasets
 
 We use two publicly available colorectal cancer microbiome studies:
 
@@ -46,7 +46,7 @@ We use two publicly available colorectal cancer microbiome studies:
 
 ---
 
-## 🔬 Methods
+## Methods
 
 ### Data Processing
 - Sample alignment between feature tables and metadata
@@ -74,7 +74,7 @@ We use two publicly available colorectal cancer microbiome studies:
 
 ---
 
-## 🚀 How to Reproduce
+## How to Reproduce
 
 ### Prerequisites
 - **R ≥ 4.0** installed on your system
