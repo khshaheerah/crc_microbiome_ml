@@ -9,7 +9,7 @@ library(gridExtra)
 library(corrplot)
 
 # Set your path (CHANGE THIS TO YOUR PATH)
-setwd("/Users/shaheerah/R_analysis/crc_microbiome_ml")
+setwd("/Users/<USERNAME>/Path to/crc_microbiome_ml")
 
 # Create output directory if it doesn't exist
 if(!dir.exists("output/figures")) dir.create("output/figures", recursive = TRUE)
@@ -353,36 +353,6 @@ if(file.exists("output/figures/roc_curves.png") &
   dev.off()
   cat("✅ Saved: output/figures/combined_figure.png\n")
 }
-
-# ============================================
-# 9. Create README for output folder
-# ============================================
-cat("\n📖 STEP 9: Creating README for output folder...\n")
-
-readme_text <- c(
-  "# Output Files Description",
-  "",
-  "## Figures",
-  "- `roc_curves.png`: ROC curves for training and test sets",
-  "- `cv_curve.png`: Lasso cross-validation curve",
-  "- `feature_weights.png`: Barplot of feature weights",
-  "- `feature_weights_enhanced.png`: Enhanced feature weight plot with colors",
-  "- `heatmap_top_features.png`: Heatmap of top discriminative features",
-  "- `top_features_boxplots.png`: Boxplots of abundance for top features",
-  "- `feature_correlation.png`: Correlation between top features",
-  "- `performance_comparison.png`: Barplot comparing training/test performance",
-  "- `combined_figure.png`: Combined ROC and feature weights for publication",
-  "",
-  "## Data Files",
-  "- `feature_weights.csv`: All features with non-zero coefficients",
-  "- `performance_metrics.csv`: Model performance metrics",
-  "- `analysis_summary.txt`: Text summary of all results",
-  "",
-  "## Models",
-  "- `lasso_model_complete.rds`: Complete Lasso model object",
-  "",
-  "Generated on: ", date()
-)
 
 writeLines(readme_text, "output/README_output.txt")
 cat("✅ Saved: output/README_output.txt\n")
