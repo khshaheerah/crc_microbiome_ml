@@ -1,4 +1,4 @@
-# scripts/02_exploratory_analysis_FINAL.R
+# scripts/02_exploratory_analysis.R
 # Exploratory analysis of microbiome data
 
 # Load required libraries
@@ -7,7 +7,7 @@ library(vegan)
 library(ggpubr)
 
 # Set your path (CHANGE THIS TO YOUR PATH)
-setwd("/Users/shaheerah/R_analysis/crc_microbiome_ml")
+setwd("/Users/<USERNAME>/Path to/crc_microbiome_ml")
 
 # Create output directory if it doesn't exist
 if(!dir.exists("output/figures")) {
