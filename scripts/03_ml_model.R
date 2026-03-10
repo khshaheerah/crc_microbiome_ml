@@ -7,7 +7,7 @@ library(glmnet)
 library(pROC)
 
 # Set your path (CHANGE THIS TO YOUR PATH)
-setwd("/Users/shaheerah/R_analysis/crc_microbiome_ml")
+setwd("/Users/<USERNAME>/Path to/crc_microbiome_ml")
 
 # Create output directories if they don't exist
 if(!dir.exists("output/figures")) dir.create("output/figures", recursive = TRUE)
