@@ -102,24 +102,23 @@ We use two publicly available colorectal cancer microbiome studies:
    source("scripts/04_visualization.R")  # Creates final visualizations
 
 
-"# Output Files Description",
-  "",
-  "## Figures",
-  "- `roc_curves.png`: ROC curves for training and test sets",
-  "- `cv_curve.png`: Lasso cross-validation curve",
-  "- `feature_weights.png`: Barplot of feature weights",
-  "- `feature_weights_enhanced.png`: Enhanced feature weight plot with colors",
-  "- `heatmap_top_features.png`: Heatmap of top discriminative features",
-  "- `top_features_boxplots.png`: Boxplots of abundance for top features",
-  "- `feature_correlation.png`: Correlation between top features",
-  "- `performance_comparison.png`: Barplot comparing training/test performance",
-  "- `combined_figure.png`: Combined ROC and feature weights for publication",
-  "",
-  "## Data Files",
-  "- `feature_weights.csv`: All features with non-zero coefficients",
-  "- `performance_metrics.csv`: Model performance metrics",
-  "- `analysis_summary.txt`: Text summary of all results",
-  "",
-  "## Models",
-  "- `lasso_model_complete.rds`: Complete Lasso model object",
-  ""
+## Output Files
+
+### Figures
+- `roc_curves.png`: ROC curves for training and test sets
+- `cv_curve.png`: Lasso cross-validation curve
+- `feature_weights.png`: Barplot of feature weights
+- `feature_weights_enhanced.png`: Enhanced feature weight plot with colors
+- `heatmap_top_features.png`: Heatmap of top discriminative features
+- `top_features_boxplots.png`: Boxplots of abundance for top features
+- `feature_correlation.png`: Correlation between top features
+- `performance_comparison.png`: Barplot comparing training/test performance
+- `combined_figure.png`: Combined ROC and feature weights for publication
+
+### Data Files
+- `feature_weights.csv`: All features with non-zero coefficients
+- `performance_metrics.csv`: Model performance metrics
+- `analysis_summary.txt`: Text summary of all results
+
+### Models
+- `lasso_model_complete.rds`: Complete Lasso model object
