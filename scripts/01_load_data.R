@@ -3,7 +3,7 @@
 library(tidyverse)
 
 # Set your path
-setwd("/Users/shaheerah/R_analysis/crc_microbiome_ml")
+setwd("/Users/<USERNAME>/Path to/crc_microbiome_ml")
 
 # Create data directory if it doesn't exist
 if(!dir.exists("data")) dir.create("data")
