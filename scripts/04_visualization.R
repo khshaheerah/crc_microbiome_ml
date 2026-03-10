@@ -17,7 +17,7 @@ if(!dir.exists("output/figures")) dir.create("output/figures", recursive = TRUE)
 # ============================================
 # 1. Load data and results
 # ============================================
-cat("\n📊 STEP 1: Loading data and results...\n")
+cat("\nSTEP 1: Loading data and results...\n")
 
 # Load original data
 french_data <- readRDS("data/french_data.rds")
@@ -27,14 +27,14 @@ meta_fr <- french_data$metadata
 # Load model results
 if(file.exists("output/feature_weights.csv")) {
   feature_weights <- read.csv("output/feature_weights.csv")
-  cat("✅ Loaded feature weights with", nrow(feature_weights), "features\n")
+  cat("Loaded feature weights with", nrow(feature_weights), "features\n")
 } else {
-  stop("❌ feature_weights.csv not found! Run Script 3 first.")
+  stop("feature_weights.csv not found! Run Script 3 first.")
 }
 
 if(file.exists("output/performance_metrics.csv")) {
   performance <- read.csv("output/performance_metrics.csv")
-  cat("✅ Loaded performance metrics\n")
+  cat("Loaded performance metrics\n")
 }
 
 # Align samples
@@ -48,7 +48,7 @@ feat_fr_rel <- prop.table(as.matrix(feat_fr), 2) * 100
 # ============================================
 # 2. Heatmap of top features
 # ============================================
-cat("\n🔥 STEP 2: Creating heatmap of top features...\n")
+cat("\nSTEP 2: Creating heatmap of top features...\n")
 
 # Get top 25 features (mix of positive and negative)
 top25 <- feature_weights %>%
@@ -62,7 +62,7 @@ available_features <- intersect(top25_features, rownames(feat_fr_rel))
 cat("Features available for heatmap:", length(available_features), "/ 25\n")
 
 if(length(available_features) < 5) {
-  cat("⚠️  Not enough top features. Using all available features from model...\n")
+  cat("Not enough top features. Using all available features from model...\n")
   available_features <- intersect(feature_weights$feature[1:50], rownames(feat_fr_rel))
   available_features <- head(available_features, 25)
 }
@@ -100,12 +100,12 @@ pheatmap(
   color = colorRampPalette(c("#377EB8", "white", "#E41A1C"))(100)
 )
 dev.off()
-cat("✅ Saved: output/figures/heatmap_top_features.png\n")
+cat("Saved: output/figures/heatmap_top_features.png\n")
 
 # ============================================
 # 3. Enhanced feature weight plot
 # ============================================
-cat("\n📊 STEP 3: Creating enhanced feature weight plot...\n")
+cat("\nSTEP 3: Creating enhanced feature weight plot...\n")
 
 # Separate positive and negative
 positive_features <- feature_weights %>%
@@ -149,12 +149,12 @@ p_weights <- ggplot(plot_features,
 
 ggsave("output/figures/feature_weights_enhanced.png", p_weights, 
        width = 12, height = 8, dpi = 300)
-cat("✅ Saved: output/figures/feature_weights_enhanced.png\n")
+cat("Saved: output/figures/feature_weights_enhanced.png\n")
 
 # ============================================
 # 4. Performance comparison plot
 # ============================================
-cat("\n📈 STEP 4: Creating performance comparison plot...\n")
+cat("\nSTEP 4: Creating performance comparison plot...\n")
 
 if(exists("performance")) {
   # Reshape data for plotting
@@ -180,13 +180,13 @@ if(exists("performance")) {
   
   ggsave("output/figures/performance_comparison.png", p_perf, 
          width = 10, height = 6, dpi = 300)
-  cat("✅ Saved: output/figures/performance_comparison.png\n")
+  cat("Saved: output/figures/performance_comparison.png\n")
 }
 
 # ============================================
 # 5. Abundance boxplots for top features
 # ============================================
-cat("\n📦 STEP 5: Creating abundance boxplots...\n")
+cat("\nSTEP 5: Creating abundance boxplots...\n")
 
 # Select top 6 features from each group
 top6_positive <- head(positive_features$feature, 6)
@@ -235,13 +235,13 @@ if(nrow(boxplot_data) > 0) {
   
   ggsave("output/figures/top_features_boxplots.png", p_box, 
          width = 14, height = 10, dpi = 300)
-  cat("✅ Saved: output/figures/top_features_boxplots.png\n")
+  cat("Saved: output/figures/top_features_boxplots.png\n")
 }
 
 # ============================================
 # 6. Correlation heatmap of top features
 # ============================================
-cat("\n🔗 STEP 6: Creating correlation heatmap...\n")
+cat("\nSTEP 6: Creating correlation heatmap...\n")
 
 if(length(available_features) >= 5) {
   # Calculate correlation between top features
@@ -259,13 +259,13 @@ if(length(available_features) >= 5) {
            title = "Correlation Between Top Features",
            mar = c(0,0,2,0))
   dev.off()
-  cat("✅ Saved: output/figures/feature_correlation.png\n")
+  cat("Saved: output/figures/feature_correlation.png\n")
 }
 
 # ============================================
 # 7. Create summary report
 # ============================================
-cat("\n📝 STEP 7: Creating summary report...\n")
+cat("\nSTEP 7: Creating summary report...\n")
 
 sink("output/analysis_summary.txt")
 cat("========================================\n")
@@ -316,12 +316,12 @@ if(any(grepl("Porphyromonas", feature_weights$feature))) {
 }
 
 sink()
-cat("✅ Saved: output/analysis_summary.txt\n")
+cat("Saved: output/analysis_summary.txt\n")
 
 # ============================================
 # 8. Create combined figure for publication
 # ============================================
-cat("\n🎯 STEP 8: Creating combined figure...\n")
+cat("\nSTEP 8: Creating combined figure...\n")
 
 if(file.exists("output/figures/roc_curves.png") & 
    file.exists("output/figures/feature_weights_enhanced.png")) {
@@ -351,8 +351,8 @@ if(file.exists("output/figures/roc_curves.png") &
   popViewport()
   
   dev.off()
-  cat("✅ Saved: output/figures/combined_figure.png\n")
+  cat("Saved: output/figures/combined_figure.png\n")
 }
 
 writeLines(readme_text, "output/README_output.txt")
-cat("✅ Saved: output/README_output.txt\n")
+cat("Saved: output/README_output.txt\n")
