@@ -87,22 +87,20 @@ We use two publicly available colorectal cancer microbiome studies:
    git clone https://github.com/khshaheerah/crc_microbiome_ml.git
    cd crc_microbiome_ml
 
-2. **Install required R packages
-Open R or RStudio and run:
-
-packages <- c("tidyverse", "vegan", "ggpubr", "glmnet", "pROC", 
+2. **Load and install packages**
+   ```r
+   packages <- c("tidyverse", "vegan", "ggpubr", "glmnet", "pROC", 
               "pheatmap", "gridExtra", "corrplot", "grid", "png")
-install.packages(packages[!packages %in% installed.packages()])
+   install.packages(packages[!packages %in% installed.packages()])
 
-3. Run the analysis pipeline
-In R, set your working directory and run scripts in order:
+3. **Run the analysis pipeline**
+   ```r
+   setwd("/path/to/crc_microbiome_ml")  # Change to your path
+   source("scripts/01_load_data.R")      # Downloads and processes data
+   source("scripts/02_exploratory_analysis.R")  # Creates exploratory plots
+   source("scripts/03_ml_model.R")       # Trains ML model
+   source("scripts/04_visualization.R")  # Creates final visualizations
 
-setwd("/path/to/crc_microbiome_ml")  # Change to your path
-
-source("scripts/01_load_data.R")      # Downloads and processes data
-source("scripts/02_exploratory_analysis.R")  # Creates exploratory plots
-source("scripts/03_ml_model.R")       # Trains ML model
-source("scripts/04_visualization.R")  # Creates final visualizations
 
 "# Output Files Description",
   "",
