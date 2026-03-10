@@ -1,0 +1,42 @@
+# R specific files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+.Rprof
+*.Rproj
+.Rproj.user/
+
+# Data files (too large)
+data/*.tsv
+data/*.csv
+data/*.rds
+data/*.txt
+!data/README.md  # (if you want to keep a data description file)
+
+# Output files (can be regenerated)
+output/*.csv
+output/*.png
+output/*.pdf
+output/*.txt
+output/models/
+output/figures/
+!output/README_output.txt  # (keep the README if you want)
+
+# Mac specific
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Log files
+*.log
