@@ -16,7 +16,7 @@ if(!dir.exists("output/models")) dir.create("output/models", recursive = TRUE)
 # ============================================
 # 1. Load data from RDS files
 # ============================================
-cat("\n📊 STEP 1: Loading data...\n")
+cat("\nSTEP 1: Loading data...\n")
 
 french_data <- readRDS("data/french_data.rds")
 chinese_data <- readRDS("data/chinese_data.rds")
@@ -32,7 +32,7 @@ cat("Chinese data:", ncol(feat_cn), "samples,", nrow(feat_cn), "features\n")
 # ============================================
 # 2. Preprocess training data (French)
 # ============================================
-cat("\n🔧 STEP 2: Preprocessing training data...\n")
+cat("\nSTEP 2: Preprocessing training data...\n")
 
 # Align French samples
 fr_common <- intersect(colnames(feat_fr), rownames(meta_fr))
