@@ -26,8 +26,8 @@ meta_fr <- french_data$metadata
 feat_cn <- chinese_data$features
 meta_cn <- chinese_data$metadata
 
-cat("✅ French data:", ncol(feat_fr), "samples,", nrow(feat_fr), "features\n")
-cat("✅ Chinese data:", ncol(feat_cn), "samples,", nrow(feat_cn), "features\n")
+cat("French data:", ncol(feat_fr), "samples,", nrow(feat_fr), "features\n")
+cat("Chinese data:", ncol(feat_cn), "samples,", nrow(feat_cn), "features\n")
 
 # ============================================
 # 2. Preprocess training data (French)
@@ -53,13 +53,13 @@ names(y_train) <- rownames(meta_fr)
 feat_present <- colSums(X_train > 0.01) / nrow(X_train)
 X_train <- X_train[, feat_present > 0.1, drop = FALSE]
 
-cat("✅ Training set:", nrow(X_train), "samples,", ncol(X_train), "features\n")
-cat("   Class distribution:", table(y_train), "\n")
+cat("Training set:", nrow(X_train), "samples,", ncol(X_train), "features\n")
+cat("Class distribution:", table(y_train), "\n")
 
 # ============================================
 # 3. Preprocess test data (Chinese)
 # ============================================
-cat("\n🔧 STEP 3: Preprocessing test data...\n")
+cat("\n STEP 3: Preprocessing test data...\n")
 
 # Align Chinese samples
 cn_common <- intersect(colnames(feat_cn), rownames(meta_cn))
@@ -81,14 +81,14 @@ common_features <- intersect(colnames(X_train), colnames(X_test_raw))
 X_train <- X_train[, common_features]
 X_test <- X_test_raw[, common_features]
 
-cat("✅ Test set:", nrow(X_test), "samples,", ncol(X_test), "features\n")
-cat("   Class distribution:", table(y_test), "\n")
-cat("✅ Common features:", length(common_features), "\n")
+cat("Test set:", nrow(X_test), "samples,", ncol(X_test), "features\n")
+cat("Class distribution:", table(y_test), "\n")
+cat("Common features:", length(common_features), "\n")
 
 # ============================================
 # 4. Train Lasso model with cross-validation
 # ============================================
-cat("\n🤖 STEP 4: Training Lasso model...\n")
+cat("\n STEP 4: Training Lasso model...\n")
 
 set.seed(123)  # For reproducibility
 
@@ -107,17 +107,17 @@ cv_lasso <- cv.glmnet(
 lambda_min <- cv_lasso$lambda.min
 lambda_1se <- cv_lasso$lambda.1se
 
-cat("✅ Best lambda (min):", round(lambda_min, 4), "\n")
-cat("✅ Best lambda (1se):", round(lambda_1se, 4), "\n")
+cat("Best lambda (min):", round(lambda_min, 4), "\n")
+cat("Best lambda (1se):", round(lambda_1se, 4), "\n")
 
 # Number of non-zero features at best lambda
 n_features <- cv_lasso$nzero[which(cv_lasso$lambda == lambda_min)]
-cat("✅ Non-zero features:", n_features, "\n")
+cat("Non-zero features:", n_features, "\n")
 
 # ============================================
 # 5. Make predictions
 # ============================================
-cat("\n📈 STEP 5: Making predictions...\n")
+cat("\nSTEP 5: Making predictions...\n")
 
 # Predictions on training set
 pred_train <- predict(cv_lasso, newx = X_train, s = "lambda.min", type = "response")
@@ -130,7 +130,7 @@ pred_test_class <- ifelse(pred_test > 0.5, 1, 0)
 # ============================================
 # 6. Calculate performance metrics
 # ============================================
-cat("\n📊 STEP 6: Calculating performance...\n")
+cat("\nSTEP 6: Calculating performance...\n")
 
 # AUC
 train_roc <- roc(y_train, as.vector(pred_train))
@@ -162,7 +162,7 @@ write.csv(performance, "output/performance_metrics.csv", row.names = FALSE)
 # ============================================
 # 7. Extract important features
 # ============================================
-cat("\n🔍 STEP 7: Extracting important features...\n")
+cat("\nSTEP 7: Extracting important features...\n")
 
 # Get coefficients at best lambda
 coef_matrix <- as.matrix(coef(cv_lasso, s = "lambda.min"))
@@ -173,7 +173,7 @@ feature_weights <- data.frame(
   filter(coefficient != 0) %>%
   arrange(desc(abs(coefficient)))
 
-cat("✅ Found", nrow(feature_weights), "features with non-zero coefficients\n")
+cat("Found", nrow(feature_weights), "features with non-zero coefficients\n")
 
 # Show top features
 cat("\nTop 10 features associated with CRC:\n")
@@ -190,7 +190,7 @@ write.csv(feature_weights, "output/feature_weights.csv", row.names = FALSE)
 # ============================================
 # 8. Create plots
 # ============================================
-cat("\n🎨 STEP 8: Creating plots...\n")
+cat("\nSTEP 8: Creating plots...\n")
 
 # Plot 1: ROC Curves
 png("output/figures/roc_curves.png", width = 800, height = 600, res = 100)
@@ -205,7 +205,7 @@ legend("bottomright",
        col = c("#377EB8", "#E41A1C"), lwd = 3, cex = 1.2)
 grid()
 dev.off()
-cat("✅ Saved: output/figures/roc_curves.png\n")
+cat("Saved: output/figures/roc_curves.png\n")
 
 # Plot 2: Cross-validation curve
 png("output/figures/cv_curve.png", width = 800, height = 600, res = 100)
@@ -217,7 +217,7 @@ legend("topright",
        legend = c("Lambda.min", "Lambda.1se"),
        col = c("#E41A1C", "#377EB8"), lty = 2, lwd = 2)
 dev.off()
-cat("✅ Saved: output/figures/cv_curve.png\n")
+cat("Saved: output/figures/cv_curve.png\n")
 
 # Plot 3: Feature weights (top 20)
 top20 <- head(feature_weights, 20)
@@ -239,12 +239,12 @@ p_weights <- ggplot(top20, aes(x = reorder(feature, coefficient),
 
 ggsave("output/figures/feature_weights.png", p_weights, 
        width = 10, height = 7, dpi = 300)
-cat("✅ Saved: output/figures/feature_weights.png\n")
+cat("Saved: output/figures/feature_weights.png\n")
 
 # ============================================
 # 9. Save model and session info
 # ============================================
-cat("\n💾 STEP 9: Saving model...\n")
+cat("\nSTEP 9: Saving model...\n")
 
 # Save model
 saveRDS(list(
