@@ -4,9 +4,8 @@ install.packages(c("tidyverse", "remotes", "vegan", "pheatmap", "ggpubr"))
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
-BiocManager::install(c("SIAMCAT", "phyloseq"))
+BiocManager::install(c("phyloseq"))
 
 # Verify installations
-library(SIAMCAT)
 library(phyloseq)
 print("Packages installed successfully!")
