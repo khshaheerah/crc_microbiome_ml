@@ -23,7 +23,7 @@ french_data <- readRDS("data/french_data.rds")
 feat_fr <- french_data$features
 meta_fr <- french_data$metadata
 
-cat("✅ Data loaded successfully\n")
+cat(" Data loaded successfully\n")
 cat("   Features:", nrow(feat_fr), "\n")
 cat("   Samples:", ncol(feat_fr), "\n")
 
@@ -36,14 +36,14 @@ common_samples <- intersect(colnames(feat_fr), rownames(meta_fr))
 feat_fr <- feat_fr[, common_samples]
 meta_fr <- meta_fr[common_samples, , drop = FALSE]
 
-cat("✅ Aligned", length(common_samples), "samples\n")
+cat(" Aligned", length(common_samples), "samples\n")
 cat("   Class distribution:\n")
 print(table(meta_fr$Group))
 
 # ============================================
 # 3. Convert to relative abundances
 # ============================================
-cat("\n📈 STEP 3: Calculating relative abundances...\n")
+cat("\n STEP 3: Calculating relative abundances...\n")
 
 feat_fr_mat <- as.matrix(feat_fr)
 feat_fr_rel <- prop.table(feat_fr_mat, 2) * 100  # As percentages
@@ -51,7 +51,7 @@ feat_fr_rel <- prop.table(feat_fr_mat, 2) * 100  # As percentages
 # ============================================
 # 4. Alpha Diversity Analysis
 # ============================================
-cat("\n📊 STEP 4: Calculating alpha diversity...\n")
+cat("\n STEP 4: Calculating alpha diversity...\n")
 
 # Calculate Shannon diversity
 alpha_div <- diversity(t(feat_fr_mat), index = "shannon")
@@ -100,7 +100,7 @@ ggsave("output/figures/alpha_diversity_richness.png",
 # ============================================
 # 5. Top Abundant Species
 # ============================================
-cat("\n📊 STEP 5: Finding top abundant species...\n")
+cat("\n STEP 5: Finding top abundant species...\n")
 
 # Calculate mean abundance across all samples
 mean_abundance <- rowMeans(feat_fr_rel)
@@ -139,7 +139,7 @@ ggsave("output/figures/top_species_boxplot.png",
 # ============================================
 # 6. Beta Diversity (PCoA)
 # ============================================
-cat("\n📊 STEP 6: Calculating beta diversity...\n")
+cat("\n STEP 6: Calculating beta diversity...\n")
 
 # Calculate Bray-Curtis distance
 dist_mat <- vegdist(t(feat_fr_rel), method = "bray")
@@ -185,7 +185,7 @@ ggsave("output/figures/beta_diversity_pcoa.png",
 # ============================================
 # 7. Differential Abundance (Wilcoxon test)
 # ============================================
-cat("\n📊 STEP 7: Testing differential abundance...\n")
+cat("\n STEP 7: Testing differential abundance...\n")
 
 # Perform Wilcoxon test for each species
 species_names <- rownames(feat_fr_rel)
@@ -248,7 +248,7 @@ ggsave("output/figures/volcano_plot.png",
 # ============================================
 # 8. Summary Statistics
 # ============================================
-cat("\n📝 STEP 8: Generating summary statistics...\n")
+cat("\n STEP 8: Generating summary statistics...\n")
 
 summary_stats <- data.frame(
   Metric = c("Total Samples", "Controls (CTR)", "Cases (CRC)",
